@@ -2,9 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+
 import TodoInput from "./TodoInput";
 import TodoListItem from "./TodoListItem";
 import TodoNoItem from "./TodoNoItem";
+
+import styles from "./TodoListContent.module.css";
 
 export default function TodoListContent() {
   const [todos, setTodos] = useState([]);
@@ -44,7 +47,7 @@ export default function TodoListContent() {
   }, []);
 
   return (
-    <main className="todoList_Content">
+    <main className={styles.todoList_Content}>
       {/* 透過 todo-added emit 來觸發 handleTodoAdded 方法 */}
       <TodoInput onTodoAdded={handleTodoAdded} />
       {/* 根據 hasTodos 計算屬性動態顯示 TodoListItem 或 TodoNoItem */}
