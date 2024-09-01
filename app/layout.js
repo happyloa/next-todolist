@@ -10,7 +10,7 @@ const notoSansTC = Noto_Sans_TC({
 
 export const metadata = {
   title: "Next.js To-Do List",
-  description: "Next.js To-Do List refactored from Vue3 by Aaron",
+  description: "Next.js To-Do List refactored from Vue 3 by Aaron",
   openGraph: {
     images: [
       {
