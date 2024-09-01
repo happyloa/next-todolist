@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -24,6 +24,17 @@ export default function RegisterForm() {
   const [passwordError, setPasswordError] = useState(false);
   const [checkPasswordError, setCheckPasswordError] = useState("");
 
+  // 使用 useEffect 來監控 password 和 checkPassword 的變化
+  useEffect(() => {
+    setCheckPasswordError(
+      !checkPassword
+        ? "此欄位不可留空"
+        : checkPassword !== password
+        ? "與輸入的密碼不符合"
+        : ""
+    );
+  }, [password, checkPassword]);
+
   // 處理 input 事件，根據欄位是否為空或不一致設定錯誤狀態
   const handleInput = (field) => {
     switch (field) {
@@ -35,22 +46,6 @@ export default function RegisterForm() {
         break;
       case "password":
         setPasswordError(!password);
-        setCheckPasswordError(
-          checkPassword && checkPassword !== password
-            ? "與輸入的密碼不符合"
-            : !checkPassword
-            ? "此欄位不可留空"
-            : ""
-        );
-        break;
-      case "checkPassword":
-        setCheckPasswordError(
-          !checkPassword
-            ? "此欄位不可留空"
-            : checkPassword !== password
-            ? "與輸入的密碼不符合"
-            : ""
-        );
         break;
     }
   };
