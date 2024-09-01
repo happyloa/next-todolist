@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
 import axios from "axios";
 
 import styles from "./TodoListItem.module.css";
 
-export default function TodoListItem() {
+const TodoListItem = forwardRef((props, ref) => {
   const [todos, setTodos] = useState([]);
   const [activeTab, setActiveTab] = useState("all");
 
@@ -21,6 +21,11 @@ export default function TodoListItem() {
       console.error("無法獲取待辦事項列表:", error.message);
     }
   };
+
+  // 使用 useImperativeHandle 來讓父元件可以調用 getTodos 方法
+  useImperativeHandle(ref, () => ({
+    getTodos,
+  }));
 
   // 刪除指定 ID 的待辦事項
   const deleteTodo = async (id) => {
@@ -138,4 +143,6 @@ export default function TodoListItem() {
       </div>
     </div>
   );
-}
+});
+
+export default TodoListItem;

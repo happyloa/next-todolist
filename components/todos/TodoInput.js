@@ -21,7 +21,7 @@ export default function TodoInput({ onTodoAdded }) {
       setNewTodo(""); // 清空輸入欄位
 
       // 觸發父元件的回調函數
-      onTodoAdded();
+      onTodoAdded(); // 通知 TodoListItem 進行更新
     } catch (error) {
       // 錯誤處理
       console.error(

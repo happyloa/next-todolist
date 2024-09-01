@@ -48,10 +48,7 @@ export default function TodoListContent() {
 
   return (
     <main className={styles.todoList_Content}>
-      {/* 透過 todo-added emit 來觸發 handleTodoAdded 方法 */}
       <TodoInput onTodoAdded={handleTodoAdded} />
-      {/* 根據 hasTodos 計算屬性動態顯示 TodoListItem 或 TodoNoItem */}
-      {/* 將 TodoListItem 綁定到 todoListItemRef，以便能夠觸發其方法 */}
       {hasTodos ? <TodoListItem ref={todoListItemRef} /> : <TodoNoItem />}
     </main>
   );
