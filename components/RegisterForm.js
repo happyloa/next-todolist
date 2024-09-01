@@ -84,41 +84,48 @@ export default function RegisterForm() {
         : ""
     );
 
-    // 如果沒有錯誤，則進行註冊請求
+    // 如果任何欄位有錯誤，則無法發出請求
     if (
-      !emailError &&
-      !nicknameError &&
-      !passwordError &&
-      !checkPasswordError
+      emailError ||
+      nicknameError ||
+      passwordError ||
+      checkPasswordError ||
+      !email ||
+      !nickname ||
+      !password ||
+      !checkPassword
     ) {
-      try {
-        // 發送 POST 請求到註冊端點
-        const response = await axios.post(
-          "https://todolist-api.hexschool.io/users/sign_up",
-          {
-            email,
-            password,
-            nickname,
-          }
-        );
-        // 註冊成功顯示提示訊息並跳轉至登入頁面
-        showAlert(
-          "恭喜您完成註冊😁",
-          "歡迎使用我們的 To-Do List 服務",
-          "success",
-          "Ya～帶我去登入畫面"
-        ).then(() => {
-          router.push("/login");
-        });
-      } catch (error) {
-        // 處理錯誤並顯示錯誤訊息
-        showAlert(
-          "註冊失敗😭😭",
-          error.response?.data?.message || error.message,
-          "error",
-          "我真的會謝"
-        );
-      }
+      return;
+    }
+
+    // 如果沒有錯誤，則進行註冊請求
+    try {
+      // 發送 POST 請求到註冊端點
+      const response = await axios.post(
+        "https://todolist-api.hexschool.io/users/sign_up",
+        {
+          email,
+          password,
+          nickname,
+        }
+      );
+      // 註冊成功顯示提示訊息並跳轉至登入頁面
+      showAlert(
+        "恭喜您完成註冊😁",
+        "歡迎使用我們的 To-Do List 服務",
+        "success",
+        "Ya～帶我去登入畫面"
+      ).then(() => {
+        router.push("/login");
+      });
+    } catch (error) {
+      // 處理錯誤並顯示錯誤訊息
+      showAlert(
+        "註冊失敗😭😭",
+        error.response?.data?.message || error.message,
+        "error",
+        "我真的會謝"
+      );
     }
   };
 
