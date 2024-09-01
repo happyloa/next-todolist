@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import axios from "axios";
-import showAlert from "../components/showAlert"; // 匯入自定義的 showAlert 函數
+import showAlert from "./showAlert"; // 匯入自定義的 showAlert 函數
 
 import styles from "./FormStyle.module.css";
 
