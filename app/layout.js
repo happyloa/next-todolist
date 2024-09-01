@@ -1,5 +1,7 @@
 import { Noto_Sans_TC } from "next/font/google";
+
 import "./globals.css";
+import "./scrollBar.css";
 
 const notoSansTC = Noto_Sans_TC({
   subsets: ["latin"],
