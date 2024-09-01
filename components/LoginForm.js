@@ -125,7 +125,7 @@ export default function LoginForm() {
       {/* 跳轉到註冊帳號頁面 */}
       <a
         href="/register"
-        className={`${styles.formControls_btnLink} link-underlined`}>
+        className={`${styles["formControls_btnLink"]} ${styles["link-underlined"]}`}>
         註冊帳號
       </a>
     </form>
