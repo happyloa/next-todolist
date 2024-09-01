@@ -1,0 +1,17 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+*::selection {
+  background-color: #d87355;
+  color: #ffffff;
+}
+
+a {
+  text-decoration: none;
+}
