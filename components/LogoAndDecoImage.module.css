@@ -1,0 +1,27 @@
+.aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 386px;
+  max-height: 448px;
+}
+
+.aside img {
+  width: 100%;
+}
+
+.logo {
+  max-width: 312px;
+}
+
+@media (max-width: 576px) {
+  .aside {
+    width: auto;
+    height: auto;
+  }
+
+  .hideOnMobile {
+    display: none;
+  }
+}
