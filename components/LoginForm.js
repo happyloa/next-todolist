@@ -2,8 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+
 import axios from "axios";
 import showAlert from "../components/showAlert"; // 匯入自定義的 showAlert 函數
+
 import styles from "./FormStyle.module.css";
 
 export default function LoginForm() {
@@ -123,11 +126,11 @@ export default function LoginForm() {
       />
 
       {/* 跳轉到註冊帳號頁面 */}
-      <a
+      <Link
         href="/register"
         className={`${styles["formControls_btnLink"]} ${styles["link-underlined"]}`}>
         註冊帳號
-      </a>
+      </Link>
     </form>
   );
 }
