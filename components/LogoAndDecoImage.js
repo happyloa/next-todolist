@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../styles/LogoAndDecoImage.module.css";
+import styles from "./LogoAndDecoImage.module.css";
 
 export default function LogoAndDecoImage() {
   return (
