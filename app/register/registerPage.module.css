@@ -1,0 +1,16 @@
+.container {
+  background-color: #ffd370;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 106px;
+  height: 100vh;
+  padding: 0 30px;
+}
+
+@media (max-width: 576px) {
+  .container {
+    flex-direction: column;
+    gap: 26px;
+  }
+}
