@@ -1,3 +1,12 @@
+import LogoAndDecoImage from "@/components/LogoAndDecoImage";
+import RegisterForm from "@/components/RegisterForm";
+import styles from "./registerPage.module.css";
+
 export default function Register() {
-    return <h1>註冊</h1>;
-  }
+  return (
+    <section className={styles.container}>
+      <LogoAndDecoImage />
+      <RegisterForm />
+    </section>
+  );
+}
