@@ -24,34 +24,54 @@ export default function RegisterForm() {
   const [passwordError, setPasswordError] = useState(false);
   const [checkPasswordError, setCheckPasswordError] = useState("");
 
+  // 使用 useState 來追踪欄位是否被修改
+  const [emailTouched, setEmailTouched] = useState(false);
+  const [nicknameTouched, setNicknameTouched] = useState(false);
+  const [passwordTouched, setPasswordTouched] = useState(false);
+  const [checkPasswordTouched, setCheckPasswordTouched] = useState(false);
+
   // 使用 useEffect 來監控 password 和 checkPassword 的變化
   useEffect(() => {
-    setCheckPasswordError(
-      !checkPassword
-        ? "此欄位不可留空"
-        : checkPassword !== password
-        ? "與輸入的密碼不符合"
-        : ""
-    );
-  }, [password, checkPassword]);
+    if (checkPasswordTouched) {
+      setCheckPasswordError(
+        !checkPassword
+          ? "此欄位不可留空"
+          : checkPassword !== password
+          ? "與輸入的密碼不符合"
+          : ""
+      );
+    }
+  }, [password, checkPassword, checkPasswordTouched]);
 
   // 處理 input 事件，根據欄位是否為空或不一致設定錯誤狀態
   const handleInput = (field) => {
     switch (field) {
       case "email":
-        setEmailError(!email);
+        setEmailTouched(true);
+        setEmailError(emailTouched && !email);
         break;
       case "nickname":
-        setNicknameError(!nickname);
+        setNicknameTouched(true);
+        setNicknameError(nicknameTouched && !nickname);
         break;
       case "password":
-        setPasswordError(!password);
+        setPasswordTouched(true);
+        setPasswordError(passwordTouched && !password);
+        break;
+      case "checkPassword":
+        setCheckPasswordTouched(true);
         break;
     }
   };
 
   // 處理提交表單邏輯
   const handleSubmit = async () => {
+    // 設置所有欄位為 touched 狀態
+    setEmailTouched(true);
+    setNicknameTouched(true);
+    setPasswordTouched(true);
+    setCheckPasswordTouched(true);
+
     // 驗證各欄位是否為空或不一致
     setEmailError(!email);
     setNicknameError(!nickname);
@@ -120,7 +140,7 @@ export default function RegisterForm() {
         placeholder="請輸入 email"
         required
       />
-      {emailError && <span>此欄位不可留空</span>}
+      {emailTouched && emailError && <span>此欄位不可留空</span>}
 
       {/* 暱稱輸入框 */}
       <label className={styles.formControls_label} htmlFor="nickname">
@@ -136,7 +156,7 @@ export default function RegisterForm() {
         placeholder="請輸入您的暱稱"
         required
       />
-      {nicknameError && <span>此欄位不可留空</span>}
+      {nicknameTouched && nicknameError && <span>此欄位不可留空</span>}
 
       {/* 密碼輸入框 */}
       <label className={styles.formControls_label} htmlFor="password">
@@ -152,7 +172,7 @@ export default function RegisterForm() {
         placeholder="請輸入密碼"
         required
       />
-      {passwordError && <span>此欄位不可留空</span>}
+      {passwordTouched && passwordError && <span>此欄位不可留空</span>}
 
       {/* 再次輸入密碼框 */}
       <label className={styles.formControls_label} htmlFor="check-password">
@@ -168,7 +188,9 @@ export default function RegisterForm() {
         placeholder="請再次輸入密碼"
         required
       />
-      {checkPasswordError && <span>{checkPasswordError}</span>}
+      {checkPasswordTouched && checkPasswordError && (
+        <span>{checkPasswordError}</span>
+      )}
 
       {/* 註冊按鈕 */}
       <input
