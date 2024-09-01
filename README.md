@@ -7,6 +7,7 @@
 - [線上部署連結](https://next-todolist.worksbyaaron.com/login)
 - [設計稿](https://www.figma.com/design/MFSk8P5jmmC2ns9V9YeCzM/TodoList?node-id=0-1&t=hgswJMZPd4ttA8R8-0)
 - [API 文件](https://todolist-api.hexschool.io/doc/#/)
+- [完整過程錄影](https://www.youtube.com/watch?v=w0xcsgtnoFA)
 
 ## 使用技術
 
