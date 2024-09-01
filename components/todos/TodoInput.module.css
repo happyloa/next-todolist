@@ -12,7 +12,7 @@
   position: relative;
   width: 100%;
   font-size: 16px;
-  padding: 12px 0 12px 16px;
+  padding: 16px;
 }
 
 .inputBox a {
@@ -22,7 +22,7 @@
   position: absolute;
   background: #333333;
   border-radius: 10px;
-  top: 4px;
-  right: 4px;
+  top: 5px;
+  right: 6px;
   padding: 10px;
 }
