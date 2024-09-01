@@ -1,0 +1,18 @@
+/* 頁面卷軸整體寬度 */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* 頁面卷軸軌道設定 */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #9f9a91;
+}
+
+/* 頁面卷軸位置指示器設定 */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background: #ffd370;
+}
