@@ -1,8 +1,8 @@
 ![](https://i.imgur.com/0wgSHAE.png)
 
-# 六角 Todolist API 重構為 Next.js 14
+# 六角 Todolist API 重構為 Next.js 16
 
-此專案為六角學院 2024 Vue 前端新手營最終挑戰之成品，使用 ChatGPT 4o 重構為 Next.js 14
+此專案為六角學院 2024 Vue 前端新手營最終挑戰之成品，使用 ChatGPT 4o 重構為 Next.js 16
 
 - [線上部署連結](https://next-todolist.worksbyaaron.com/login)
 - [設計稿](https://www.figma.com/design/MFSk8P5jmmC2ns9V9YeCzM/TodoList?node-id=0-1&t=hgswJMZPd4ttA8R8-0)
@@ -11,7 +11,7 @@
 
 ## 使用技術
 
-- [Next.js 14](https://nextjs.org/)（React 加強版）
+- [Next.js 16](https://nextjs.org/)（React 19，加強版 React 框架）
 
 ## 開發環境設置
 
@@ -105,6 +105,8 @@ public
 
 ## 使用的套件 & 工具
 
-- [axios](https://axios-http.com/)
-- [sweetalert2](https://sweetalert2.github.io/)
+- [Next.js 16](https://nextjs.org/) with [React 19](https://react.dev/)
+- [axios 1.13](https://axios-http.com/)
+- [sweetalert2 11.26](https://sweetalert2.github.io/)
+- [ESLint 9](https://eslint.org/)
 - [ChatGPT 4o](https://openai.com/)
