@@ -16,6 +16,7 @@
 ## 開發環境設置
 
 建議使用 [VSCode](https://code.visualstudio.com/) 搭配 [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
+- Node.js 20.9 以上版本（Next.js 16.1 需符合的新最低版本要求）
 
 ## 快速開始
 
