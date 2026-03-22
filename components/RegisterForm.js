@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import axios from "axios";
+import axios from "@/lib/axios";
 import showAlert from "./showAlert"; // 匯入自定義的 showAlert 函數
 
 import styles from "./FormStyle.module.css";
@@ -102,7 +102,7 @@ export default function RegisterForm() {
     try {
       // 發送 POST 請求到註冊端點
       const response = await axios.post(
-        "https://todolist-api.hexschool.io/users/sign_up",
+        "/users/sign_up",
         {
           email,
           password,

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "axios";
+import axios from "@/lib/axios";
 
 import styles from "./TodoInput.module.css";
 
@@ -14,7 +14,7 @@ export default function TodoInput({ onTodoAdded }) {
 
     try {
       // 發送 POST 請求來新增待辦事項
-      await axios.post("https://todolist-api.hexschool.io/todos", {
+      await axios.post("/todos", {
         content: newTodo.trim(),
       });
       console.log("成功新增待辦事項：" + newTodo.trim());

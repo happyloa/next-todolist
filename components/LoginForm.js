@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import axios from "axios";
+import axios from "@/lib/axios";
 import showAlert from "./showAlert"; // 匯入自定義的 showAlert 函數
 
 import styles from "./FormStyle.module.css";
@@ -61,7 +61,7 @@ export default function LoginForm() {
     try {
       // 發送 POST 請求到登入端點
       const response = await axios.post(
-        "https://todolist-api.hexschool.io/users/sign_in",
+        "/users/sign_in",
         {
           email,
           password,

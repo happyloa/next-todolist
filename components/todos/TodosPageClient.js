@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import axios from "axios";
+import axios from "@/lib/axios";
 import showAlert from "@/components/showAlert";
 import TodoListContent from "@/components/todos/TodoListContent";
 import styles from "@/app/todos/todosPage.module.css";
@@ -22,9 +22,7 @@ export default function TodosPageClient({ initialNickname }) {
   // 處理登出邏輯
   const handleLogout = async () => {
     try {
-      const response = await axios.post(
-        "https://todolist-api.hexschool.io/users/sign_out"
-      );
+      const response = await axios.post("/users/sign_out");
       console.log(response.data.message);
       deleteAllCookies();
 

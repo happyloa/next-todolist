@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import axios from "axios";
+import axios from "@/lib/axios";
 
 import TodoInput from "./TodoInput";
 import TodoListItem from "./TodoListItem";
@@ -16,9 +16,7 @@ export default function TodoListContent() {
   // 檢查是否有待辦事項
   const checkTodos = async () => {
     try {
-      const response = await axios.get(
-        "https://todolist-api.hexschool.io/todos"
-      );
+      const response = await axios.get("/todos");
       setTodos(response.data.data);
       console.log("已檢查待辦事項列表");
     } catch (error) {

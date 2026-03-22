@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
-import axios from "axios";
+import axios from "@/lib/axios";
 
 import styles from "./TodoListItem.module.css";
 
@@ -12,9 +12,7 @@ const TodoListItem = forwardRef((props, ref) => {
   // 獲取待辦事項列表
   const getTodos = async () => {
     try {
-      const response = await axios.get(
-        "https://todolist-api.hexschool.io/todos"
-      );
+      const response = await axios.get("/todos");
       setTodos(response.data.data);
       console.log("已獲取待辦事項清單");
     } catch (error) {
@@ -31,7 +29,7 @@ const TodoListItem = forwardRef((props, ref) => {
   const deleteTodo = async (id) => {
     const todoToDelete = todos.find((todo) => todo.id === id);
     try {
-      await axios.delete(`https://todolist-api.hexschool.io/todos/${id}`);
+      await axios.delete(`/todos/${id}`);
       console.log(
         `已刪除待辦事項：${todoToDelete.content}，ID 為：${todoToDelete.id}`
       );
@@ -47,7 +45,7 @@ const TodoListItem = forwardRef((props, ref) => {
   const toggleStatus = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
     try {
-      await axios.patch(`https://todolist-api.hexschool.io/todos/${id}/toggle`);
+      await axios.patch(`/todos/${id}/toggle`);
       console.log(`待辦事項：「${todoToToggle.content}」已切換狀態`);
       getTodos();
     } catch (error) {
