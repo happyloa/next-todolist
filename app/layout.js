@@ -9,6 +9,7 @@ const notoSansTC = Noto_Sans_TC({
 });
 
 export const metadata = {
+  metadataBase: new URL("https://next-todolist-eight.vercel.app/"), // 將此更換為你的實際部署 URL
   title: "Next.js To-Do List",
   description: "Next.js To-Do List refactored from Vue 3 by Aaron",
   openGraph: {
