@@ -1,29 +1,12 @@
 "use client";
 
-import { useState, useEffect, forwardRef, useImperativeHandle } from "react";
+import { useState } from "react";
 import axios from "@/lib/axios";
 
 import styles from "./TodoListItem.module.css";
 
-const TodoListItem = forwardRef((props, ref) => {
-  const [todos, setTodos] = useState([]);
+const TodoListItem = ({ todos, onRefresh }) => {
   const [activeTab, setActiveTab] = useState("all");
-
-  // 獲取待辦事項列表
-  const getTodos = async () => {
-    try {
-      const response = await axios.get("/todos");
-      setTodos(response.data.data);
-      console.log("已獲取待辦事項清單");
-    } catch (error) {
-      console.error("無法獲取待辦事項列表:", error.message);
-    }
-  };
-
-  // 使用 useImperativeHandle 來讓父元件可以調用 getTodos 方法
-  useImperativeHandle(ref, () => ({
-    getTodos,
-  }));
 
   // 刪除指定 ID 的待辦事項
   const deleteTodo = async (id) => {
@@ -33,7 +16,7 @@ const TodoListItem = forwardRef((props, ref) => {
       console.log(
         `已刪除待辦事項：${todoToDelete.content}，ID 為：${todoToDelete.id}`
       );
-      getTodos();
+      onRefresh();
     } catch (error) {
       console.error(
         `刪除待辦事項失敗：${todoToDelete.content}，ID 為：${todoToDelete.id}，錯誤訊息：${error.message}`
@@ -47,7 +30,7 @@ const TodoListItem = forwardRef((props, ref) => {
     try {
       await axios.patch(`/todos/${id}/toggle`);
       console.log(`待辦事項：「${todoToToggle.content}」已切換狀態`);
-      getTodos();
+      onRefresh();
     } catch (error) {
       console.error(
         `切換待辦事項狀態失敗：「${todoToToggle.content}」，ID 為：${todoToToggle.id}，錯誤訊息：${error.message}`
@@ -67,11 +50,6 @@ const TodoListItem = forwardRef((props, ref) => {
 
   // 計算已完成的待辦事項數量
   const completedTodosCount = todos.filter((todo) => todo.status).length;
-
-  // 元件掛載後，初次獲取待辦事項列表
-  useEffect(() => {
-    getTodos();
-  }, []);
 
   return (
     <div className={styles.todoList_list}>
@@ -141,9 +119,6 @@ const TodoListItem = forwardRef((props, ref) => {
       </div>
     </div>
   );
-});
-
-// 為元件添加 displayName
-TodoListItem.displayName = "TodoListItem";
+};
 
 export default TodoListItem;
