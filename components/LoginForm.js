@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 import axios from "@/lib/axios";
-import showAlert from "./showAlert"; // 匯入自定義的 showAlert 函數
+import { setCookie } from "@/lib/utils";
+import showAlert from "./showAlert";
 
 import styles from "./FormStyle.module.css";
 
@@ -24,12 +25,6 @@ export default function LoginForm() {
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
 
-  // 設定 Cookie 的函數
-  const setCookie = (name, value, days) => {
-    const date = new Date();
-    date.setDate(date.getDate() + days);
-    document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
-  };
 
   // 處理 input 事件，根據欄位是否為空設定錯誤狀態
   const handleInput = (field) => {

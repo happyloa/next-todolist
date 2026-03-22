@@ -4,27 +4,19 @@ import { useRouter } from "next/navigation";
 import axios from "@/lib/axios";
 import showAlert from "@/components/showAlert";
 import TodoListContent from "@/components/todos/TodoListContent";
+import { deleteCookies } from "@/lib/utils";
 import styles from "@/app/todos/todosPage.module.css";
 
 export default function TodosPageClient({ initialNickname }) {
   const router = useRouter();
 
-  // 刪除所有 Cookie
-  const deleteAllCookies = () => {
-    document.cookie.split(";").forEach((cookie) => {
-      document.cookie = cookie.replace(
-        /=.*/,
-        "=;expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/"
-      );
-    });
-  };
 
   // 處理登出邏輯
   const handleLogout = async () => {
     try {
       const response = await axios.post("/users/sign_out");
       console.log(response.data.message);
-      deleteAllCookies();
+      deleteCookies();
 
       // 取消註冊全局的 Authorization Token
       delete axios.defaults.headers.common["Authorization"];
