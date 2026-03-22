@@ -16,7 +16,7 @@
 ## 開發環境設置
 
 建議使用 [VSCode](https://code.visualstudio.com/) 搭配 [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
-- Node.js 20.9 以上版本（Next.js 16.1 需符合的新最低版本要求）
+- Node.js 20.9 以上版本（Next.js 16.2 需符合的新最低版本要求）
 
 ## 快速開始
 
@@ -63,6 +63,7 @@ app
 ├── favicon.ico                          網站圖示
 ├── globals.css                          網站整體樣式，有做簡單的 reset
 ├── layout.js                            網站整體架構設定，更改字型為思源黑體，並設定 og 圖片
+├── proxy.js                             路徑守衛（認證邏輯），取代了舊版的 middleware.js
 └── scrollBar.css                        客製化頁面卷軸樣式
 ```
 
@@ -106,8 +107,8 @@ public
 
 ## 使用的套件 & 工具
 
-- [Next.js 16](https://nextjs.org/) with [React 19](https://react.dev/)
-- [axios 1.13](https://axios-http.com/)
-- [sweetalert2 11.26](https://sweetalert2.github.io/)
-- [ESLint 9](https://eslint.org/)
+- [Next.js 16.2](https://nextjs.org/) with [React 19.2](https://react.dev/)
+- [axios 1.13.6](https://axios-http.com/)
+- [sweetalert2 11.26.24](https://sweetalert2.github.io/)
+- [ESLint 10.1](https://eslint.org/)
 - [ChatGPT 4o](https://openai.com/)
