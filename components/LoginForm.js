@@ -27,13 +27,13 @@ export default function LoginForm() {
 
 
   // 處理 input 事件，根據欄位是否為空設定錯誤狀態
-  const handleInput = (field) => {
+  const handleInput = (field, value) => {
     if (field === "email") {
       setEmailTouched(true);
-      setEmailError(emailTouched && !email);
+      setEmailError(!value);
     } else if (field === "password") {
       setPasswordTouched(true);
-      setPasswordError(passwordTouched && !password);
+      setPasswordError(!value);
     }
   };
 
@@ -100,7 +100,7 @@ export default function LoginForm() {
         name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        onInput={() => handleInput("email")}
+        onInput={(e) => handleInput("email", e.target.value)}
         placeholder="請輸入 email"
         required
       />
@@ -116,7 +116,7 @@ export default function LoginForm() {
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        onInput={() => handleInput("password")}
+        onInput={(e) => handleInput("password", e.target.value)}
         placeholder="請輸入密碼"
         required
       />

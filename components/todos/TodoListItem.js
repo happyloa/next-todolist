@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { apiFetch } from "@/lib/api";
 
 import styles from "./TodoListItem.module.css";
@@ -52,37 +53,25 @@ const TodoListItem = ({ todos, onRefresh }) => {
       <ul className={styles.todoList_tab}>
         {/* 根據 activeTab 動態添加 active class，並切換 tab */}
         <li>
-          <a
-            href="#"
+          <button
             className={activeTab === "all" ? styles.active : ""}
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveTab("all");
-            }}>
+            onClick={() => setActiveTab("all")}>
             全部
-          </a>
+          </button>
         </li>
         <li>
-          <a
-            href="#"
+          <button
             className={activeTab === "pending" ? styles.active : ""}
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveTab("pending");
-            }}>
+            onClick={() => setActiveTab("pending")}>
             待完成
-          </a>
+          </button>
         </li>
         <li>
-          <a
-            href="#"
+          <button
             className={activeTab === "completed" ? styles.active : ""}
-            onClick={(e) => {
-              e.preventDefault();
-              setActiveTab("completed");
-            }}>
+            onClick={() => setActiveTab("completed")}>
             已完成
-          </a>
+          </button>
         </li>
       </ul>
       <div className={styles.todoList_items}>
@@ -98,11 +87,17 @@ const TodoListItem = ({ todos, onRefresh }) => {
                 />
                 <span>{todo.content}</span>
               </label>
-              <img
-                src="/icons/delete.svg"
-                alt="刪除待辦事項"
+              <button
+                className={styles.deleteButton}
                 onClick={() => deleteTodo(todo.id)}
-              />
+                aria-label={`刪除「${todo.content}」`}>
+                <Image
+                  src="/icons/delete.svg"
+                  alt="刪除待辦事項"
+                  width={20}
+                  height={20}
+                />
+              </button>
             </li>
           ))}
         </ul>

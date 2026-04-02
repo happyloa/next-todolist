@@ -40,15 +40,12 @@ export default function TodoInput({ onTodoAdded }) {
         onChange={(e) => setNewTodo(e.target.value)}
         className={styles.input}
       />
-      <a
-        href="#"
-        onClick={(e) => {
-          e.preventDefault();
-          addTodo();
-        }}
-        className={styles.addButton}>
+      <button
+        onClick={addTodo}
+        className={styles.addButton}
+        aria-label="新增待辦事項">
         <img src="/icons/plus.svg" alt="新增待辦事項" />
-      </a>
+      </button>
     </div>
   );
 }

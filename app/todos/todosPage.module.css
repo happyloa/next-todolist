@@ -25,7 +25,12 @@
 }
 
 .logout {
+  background: none;
+  border: none;
   cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 0;
 }
 
 @media (max-width: 576px) {

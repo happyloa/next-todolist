@@ -44,19 +44,19 @@ export default function RegisterForm() {
   }, [password, checkPassword, checkPasswordTouched]);
 
   // 處理 input 事件，根據欄位是否為空或不一致設定錯誤狀態
-  const handleInput = (field) => {
+  const handleInput = (field, value) => {
     switch (field) {
       case "email":
         setEmailTouched(true);
-        setEmailError(emailTouched && !email);
+        setEmailError(!value);
         break;
       case "nickname":
         setNicknameTouched(true);
-        setNicknameError(nicknameTouched && !nickname);
+        setNicknameError(!value);
         break;
       case "password":
         setPasswordTouched(true);
-        setPasswordError(passwordTouched && !password);
+        setPasswordError(!value);
         break;
       case "checkPassword":
         setCheckPasswordTouched(true);
@@ -139,7 +139,7 @@ export default function RegisterForm() {
         name="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        onInput={() => handleInput("email")}
+        onInput={(e) => handleInput("email", e.target.value)}
         placeholder="請輸入 email"
         required
       />
@@ -155,7 +155,7 @@ export default function RegisterForm() {
         name="nickname"
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
-        onInput={() => handleInput("nickname")}
+        onInput={(e) => handleInput("nickname", e.target.value)}
         placeholder="請輸入您的暱稱"
         required
       />
@@ -171,7 +171,7 @@ export default function RegisterForm() {
         name="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        onInput={() => handleInput("password")}
+        onInput={(e) => handleInput("password", e.target.value)}
         placeholder="請輸入密碼"
         required
       />
@@ -187,7 +187,7 @@ export default function RegisterForm() {
         name="check-password"
         value={checkPassword}
         onChange={(e) => setCheckPassword(e.target.value)}
-        onInput={() => handleInput("checkPassword")}
+        onInput={(e) => handleInput("checkPassword", e.target.value)}
         placeholder="請再次輸入密碼"
         required
       />
