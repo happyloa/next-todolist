@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import axios from "@/lib/axios";
+import { apiFetch } from "@/lib/api";
 
 import TodoInput from "./TodoInput";
 import TodoListItem from "./TodoListItem";
@@ -15,9 +15,8 @@ export default function TodoListContent() {
   // 獲取待辦事項列表
   const getTodos = async () => {
     try {
-      const response = await axios.get("/todos");
-      setTodos(response.data.data);
-      console.log("已獲取最新待辦事項清單");
+      const data = await apiFetch("/todos");
+      setTodos(data.data);
     } catch (error) {
       console.error("無法獲取待辦事項列表:", error.message);
     }

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import axios from "@/lib/axios";
+import { apiFetch } from "@/lib/api";
 import showAlert from "./showAlert"; // 匯入自定義的 showAlert 函數
 
 import styles from "./FormStyle.module.css";
@@ -101,14 +101,10 @@ export default function RegisterForm() {
     // 如果沒有錯誤，則進行註冊請求
     try {
       // 發送 POST 請求到註冊端點
-      const response = await axios.post(
-        "/users/sign_up",
-        {
-          email,
-          password,
-          nickname,
-        }
-      );
+      await apiFetch("/users/sign_up", {
+        method: "POST",
+        body: JSON.stringify({ email, password, nickname }),
+      });
       // 註冊成功顯示提示訊息並跳轉至登入頁面
       showAlert(
         "恭喜您完成註冊😁",
@@ -122,7 +118,7 @@ export default function RegisterForm() {
       // 處理錯誤並顯示錯誤訊息
       showAlert(
         "註冊失敗😭😭",
-        error.response?.data?.message || error.message,
+        error.data?.message || error.message,
         "error",
         "我真的會謝"
       );

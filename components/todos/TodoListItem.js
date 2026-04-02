@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "@/lib/axios";
+import { apiFetch } from "@/lib/api";
 
 import styles from "./TodoListItem.module.css";
 
@@ -12,10 +12,7 @@ const TodoListItem = ({ todos, onRefresh }) => {
   const deleteTodo = async (id) => {
     const todoToDelete = todos.find((todo) => todo.id === id);
     try {
-      await axios.delete(`/todos/${id}`);
-      console.log(
-        `已刪除待辦事項：${todoToDelete.content}，ID 為：${todoToDelete.id}`
-      );
+      await apiFetch(`/todos/${id}`, { method: "DELETE" });
       onRefresh();
     } catch (error) {
       console.error(
@@ -28,8 +25,7 @@ const TodoListItem = ({ todos, onRefresh }) => {
   const toggleStatus = async (id) => {
     const todoToToggle = todos.find((todo) => todo.id === id);
     try {
-      await axios.patch(`/todos/${id}/toggle`);
-      console.log(`待辦事項：「${todoToToggle.content}」已切換狀態`);
+      await apiFetch(`/todos/${id}/toggle`, { method: "PATCH" });
       onRefresh();
     } catch (error) {
       console.error(

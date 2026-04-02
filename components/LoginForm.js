@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-import axios from "@/lib/axios";
+import { apiFetch } from "@/lib/api";
 import { setCookie } from "@/lib/utils";
 import showAlert from "./showAlert";
 
@@ -55,16 +55,13 @@ export default function LoginForm() {
     // 如果沒有錯誤，則進行登入請求
     try {
       // 發送 POST 請求到登入端點
-      const response = await axios.post(
-        "/users/sign_in",
-        {
-          email,
-          password,
-        }
-      );
+      const data = await apiFetch("/users/sign_in", {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+      });
 
       // 從登入回應中獲取 Token 與 nickname，並保存到 Cookie 中
-      const { token, nickname } = response.data;
+      const { token, nickname } = data;
 
       setCookie("hexschoolTodo", token, 1); // 將 Token 存入 cookie
       setCookie("nickname", nickname, 1); // 將暱稱存入 cookie
@@ -82,7 +79,7 @@ export default function LoginForm() {
       // 處理錯誤並顯示錯誤訊息
       showAlert(
         "錯誤🥲",
-        error.response?.data?.message || "登入失敗，請稍後再試",
+        error.data?.message || "登入失敗，請稍後再試",
         "error",
         "QQ好喔"
       );

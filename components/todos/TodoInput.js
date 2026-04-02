@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import axios from "@/lib/axios";
+import { apiFetch } from "@/lib/api";
 
 import styles from "./TodoInput.module.css";
 
@@ -14,10 +14,10 @@ export default function TodoInput({ onTodoAdded }) {
 
     try {
       // 發送 POST 請求來新增待辦事項
-      await axios.post("/todos", {
-        content: newTodo.trim(),
+      await apiFetch("/todos", {
+        method: "POST",
+        body: JSON.stringify({ content: newTodo.trim() }),
       });
-      console.log("成功新增待辦事項：" + newTodo.trim());
       setNewTodo(""); // 清空輸入欄位
 
       // 觸發父元件的回調函數
@@ -26,7 +26,7 @@ export default function TodoInput({ onTodoAdded }) {
       // 錯誤處理
       console.error(
         "新增待辦事項失敗:",
-        error.response?.data?.message || error.message
+        error.data?.message || error.message
       );
     }
   };
