@@ -1,5 +1,5 @@
-import LogoAndDecoImage from "@/components/LogoAndDecoImage";
-import LoginForm from "@/components/LoginForm";
+import LogoAndDecoImage from "@/components/logo-and-deco-image";
+import LoginForm from "@/components/forms/login-form";
 import styles from "./login-page.module.css";
 
 export default function Login() {

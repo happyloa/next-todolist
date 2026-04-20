@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import TodosPageClient from "@/components/todos/TodosPageClient";
+import TodosPageClient from "@/components/todos/todos-page-client";
 
 export default async function TodosPage() {
   const cookieStore = await cookies();
