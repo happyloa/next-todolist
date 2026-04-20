@@ -1,12 +1,12 @@
 import LogoAndDecoImage from "@/components/LogoAndDecoImage";
-import RegisterForm from "@/components/RegisterForm";
-import styles from "./registerPage.module.css";
+import LoginForm from "@/components/LoginForm";
+import styles from "./login-page.module.css";
 
-export default function Register() {
+export default function Login() {
   return (
     <section className={styles.container}>
       <LogoAndDecoImage />
-      <RegisterForm />
+      <LoginForm />
     </section>
   );
 }
