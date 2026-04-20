@@ -3,10 +3,10 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { apiFetch } from "@/lib/api";
-import showAlert from "@/components/showAlert";
-import TodoListContent from "@/components/todos/TodoListContent";
+import showAlert from "@/lib/show-alert";
+import TodoListContent from "@/components/todos/todo-list-content";
 import { deleteCookies } from "@/lib/utils";
-import styles from "@/app/todos/todosPage.module.css";
+import styles from "@/app/todos/todos-page.module.css";
 
 export default function TodosPageClient({ initialNickname }) {
   const router = useRouter();

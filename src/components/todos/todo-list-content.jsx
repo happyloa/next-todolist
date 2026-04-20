@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import { apiFetch } from "@/lib/api";
 
-import TodoInput from "./TodoInput";
-import TodoListItem from "./TodoListItem";
-import TodoNoItem from "./TodoNoItem";
+import TodoInput from "./todo-input";
+import TodoListItem from "./todo-list-item";
+import TodoNoItem from "./todo-no-item";
 
-import styles from "./TodoListContent.module.css";
+import styles from "./todo-list-content.module.css";
 
 export default function TodoListContent() {
   const [todos, setTodos] = useState([]);

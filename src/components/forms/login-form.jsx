@@ -6,9 +6,9 @@ import Link from "next/link";
 
 import { apiFetch } from "@/lib/api";
 import { setCookie } from "@/lib/utils";
-import showAlert from "./showAlert";
+import showAlert from "@/lib/show-alert";
 
-import styles from "./FormStyle.module.css";
+import styles from "./form-style.module.css";
 
 export default function LoginForm() {
   const router = useRouter();

@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { apiFetch } from "@/lib/api";
 
-import styles from "./TodoInput.module.css";
+import styles from "./todo-input.module.css";
 
 export default function TodoInput({ onTodoAdded }) {
   const [newTodo, setNewTodo] = useState("");
