@@ -17,7 +17,7 @@ export default function proxy(request) {
   return NextResponse.next();
 }
 
-// 設定 Middleware 匹配的路徑
+// 設定 Next.js Proxy 匹配的路徑
 export const config = {
   matcher: ["/todos", "/login", "/register"],
 };

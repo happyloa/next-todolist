@@ -5,7 +5,7 @@ const nextConfig = {
       {
         source: "/",
         destination: "/login",
-        permanent: true, // 設為 true 表示永久重定向 (301)，設為 false 表示臨時重定向 (307)
+        permanent: true, // 永久重新導向使用 308；false 則使用 307。
       },
     ];
   },

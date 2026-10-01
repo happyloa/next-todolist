@@ -12,7 +12,7 @@ export default function LogoAndDecoImage() {
           width={109}
           height={40}
           className={styles.logo}
-          priority
+          preload
         />
       </Link>
       <Image
@@ -21,7 +21,7 @@ export default function LogoAndDecoImage() {
         width={360}
         height={480}
         className={styles.hideOnMobile}
-        priority
+        preload
       />
     </aside>
   );
