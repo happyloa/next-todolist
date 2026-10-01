@@ -1,117 +1,120 @@
 ![](https://i.imgur.com/0wgSHAE.png)
 
-# 六角 Todolist API 重構為 Next.js 16
+# Next.js 待辦事項清單
 
-此專案為六角學院 2024 Vue 前端新手營最終挑戰之成品，經由 Antigravity AI 重構並優化架構為 Next.js 16 最佳實踐版本。
+此專案為六角學院 2024 Vue 前端新手營最終挑戰之成品，後續透過 Antigravity AI 協助重構為 Next.js App Router 架構，串接六角 Todolist API。
 
 - [線上部署連結](https://next-todolist.worksbyaaron.com/login)
 - [設計稿](https://www.figma.com/design/MFSk8P5jmmC2ns9V9YeCzM/TodoList?node-id=0-1&t=hgswJMZPd4ttA8R8-0)
 - [API 文件](https://todolist-api.hexschool.io/doc/#/)
 - [完整過程錄影](https://www.youtube.com/watch?v=w0xcsgtnoFA)
 
-## 重構重點 (Next.js 16 Best Practices)
+## 功能
 
-- **目錄結構優化**：所有原始碼皆移至 `src` 目錄，落實邏輯與設定分離。
-- **命名規範化**：元件與檔案統一採用 `kebab-case.jsx` 命名規範。
-- **樣式管理整合**：將卷軸與全域樣式整合至 `globals.css`。
-- **安全漏洞修復**：已將 Next.js 升級至 16.2.4，解決已知的高風險安全漏洞。
+- 帳號註冊、登入與登出。
+- 新增、刪除待辦事項，切換完成狀態。
+- 依全部、待完成、已完成篩選清單，顯示各狀態的項目數量。
+- 使用 Cookie 保存登入 Token 與暱稱，由 Proxy 控制頁面導向。
 
 ## 使用技術
 
-- [Next.js 16](https://nextjs.org/)（React 19，加強版 React 框架）
+| 套件／工具 | 目前版本與用途 |
+| --- | --- |
+| [Next.js](https://nextjs.org/) | 16.3.8，App Router、Server／Client Components、Proxy |
+| [React／React DOM](https://react.dev/) | 19.3.0，元件與互動狀態管理 |
+| [SweetAlert2](https://sweetalert2.github.io/) | 11.26.25，登入、註冊與登出提示 |
+| CSS Modules | 頁面與元件樣式；全域重設與捲軸樣式位於 `globals.css` |
+| Fetch API | 集中封裝 API 請求，自動帶入登入 Token |
 
-## 開發環境設置
+套件版本範圍設定於 `package.json`，實際安裝版本由 `package-lock.json` 鎖定。專案保留簡單的開發與建置流程，目前未使用 ESLint。
 
-建議使用 [VSCode](https://code.visualstudio.com/) 搭配 [ES7+ React/Redux/React-Native snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
+## 開發環境
 
-- Node.js 20.9 以上版本（Next.js 16.2 需符合的新最低版本要求）
+- Node.js 20.9.0 以上，搭配 npm；本次更新使用 Node.js 24.12.0 驗證。
+- 開發與建置使用 Next.js 預設的 Turbopack。
+- 建置時 `next/font/google` 需要連線下載 Noto Sans TC 字型。
+- 登入與待辦事項操作需要連線至六角 Todolist API，目前 API 網址固定於 `src/lib/api.js`，不需額外設定環境變數。
 
 ## 快速開始
 
-**專案設置（Project setup）**
-
-將專案複製到本地端
+複製專案並依鎖定檔安裝套件：
 
 ```sh
-$ git clone https://github.com/happyloa/next-todolist.git
+git clone https://github.com/happyloa/next-todolist.git
+cd next-todolist
+npm ci
 ```
 
-套件安裝
+啟動開發伺服器：
 
 ```sh
-$ cd next-todolist
-$ npm install
+npm run dev
 ```
 
-**執行專案（Start the server）**
+開啟 `http://localhost:3000/`，會重新導向至 `/login`。
+
+建立並啟動正式版本：
 
 ```sh
-$ npm run dev
+npm run build
+npm run start
 ```
 
-在瀏覽器上輸入
+| 指令 | 用途 |
+| --- | --- |
+| `npm run dev` | 啟動開發伺服器 |
+| `npm run build` | 建立正式版本 |
+| `npm run start` | 啟動已建置的正式版本，需先執行 build |
+| `npm audit` | 檢查目前相依套件的已知安全漏洞 |
+| `npm outdated` | 檢查直接相依套件是否有新版本 |
 
-```
-http://localhost:3000/
-```
+若要更新套件，使用 `npm install 套件名稱@版本` 或 `npm update`，並一併提交套件設定與鎖定檔。更新後可依序執行 `npm ci`、`npm audit` 與 `npm run build`，再檢查頁面與操作流程。
 
-即可在本地端預覽專案
+## 專案結構
 
-## 專案結構 (src)
+以下列出主要檔案，各頁面與元件的 CSS Modules 放在對應目錄內。
 
-位於 `src` 目錄下：
-
-### 頁面路徑 (App Router)
-
-位於 `src/app`
-
-```
-src/app
-├── (auth)
-│   ├── login/page.jsx                   豋入頁面（/login）
-│   └── register/page.jsx                註冊頁面（/register）
-├── todos/page.jsx                       待辦事項清單列表頁面（/todos）
-├── favicon.ico                          網站圖示
-├── globals.css                          網站整體樣式（包含卷軸樣式）
-└── layout.jsx                           網站整體架構設定，包含 Google Fonts 與 Metadata
-```
-
-### 元件檔案 (Components)
-
-位於 `src/components`
-
-```
-src/components
-├── forms
-│   ├── login-form.jsx                   登入表單元件
-│   ├── register-form.jsx                註冊表單元件
-│   └── form-style.module.css            表單共用樣式
-├── todos
-│   ├── todo-input.jsx                   新增待辦事項 input
-│   ├── todo-list-content.jsx            待辦清單主容器
-│   ├── todo-list-item.jsx               待辦事項列表項
-│   └── todo-no-item.jsx                 無事項時的裝飾元件
-├── logo-and-deco-image.jsx              頁面裝飾圖片元件
-└── logo-and-deco-image.module.css       裝飾元件樣式
-```
-
-### 工具與邏輯 (Lib)
-
-位於 `src/lib`
-
-```
-src/lib
-├── api.js                               API 請求封裝 (Fetch API)
-├── utils.js                             通用工具函式 (Cookie 管理等)
-└── show-alert.js                        自定義 Sweet Alert 2 提示工具
+```text
+next-todolist/
+├── public/
+│   ├── icons/                          新增與刪除圖示
+│   ├── image/                          Logo 與裝飾圖片
+│   └── og-image.webp                   社群分享圖片
+├── src/
+│   ├── app/
+│   │   ├── login/page.jsx              登入頁面（/login）
+│   │   ├── register/page.jsx           註冊頁面（/register）
+│   │   ├── todos/page.jsx              待辦頁面（/todos），讀取 Cookie 暱稱
+│   │   ├── favicon.ico                 網站圖示
+│   │   ├── globals.css                 全域重設與捲軸樣式
+│   │   └── layout.jsx                  根佈局、Google Fonts 與 Metadata
+│   ├── components/
+│   │   ├── forms/
+│   │   │   ├── login-form.jsx          登入表單
+│   │   │   └── register-form.jsx       註冊表單
+│   │   ├── todos/
+│   │   │   ├── todos-page-client.jsx   使用者資訊、登出與清單容器
+│   │   │   ├── todo-input.jsx          新增待辦事項
+│   │   │   ├── todo-list-content.jsx   清單資料載入與重新整理
+│   │   │   ├── todo-list-item.jsx      篩選、刪除與切換完成狀態
+│   │   │   └── todo-no-item.jsx        空清單畫面
+│   │   └── logo-and-deco-image.jsx     登入與註冊頁面共用圖片
+│   ├── lib/
+│   │   ├── api.js                      Fetch API 封裝
+│   │   ├── utils.js                    Cookie 工具
+│   │   └── show-alert.js               SweetAlert2 封裝
+│   └── proxy.js                        依登入 Cookie 決定頁面導向
+├── jsconfig.json                       @/* 對應 src/* 的路徑別名
+├── next.config.mjs                     首頁重新導向設定
+├── package.json                        套件版本範圍與執行指令
+└── package-lock.json                   套件安裝鎖定檔
 ```
 
-### 其他
+## 路由與 API
 
-- `src/proxy.js`: 路徑守衛與認證邏輯 (Middleware)
+- `/`：以 HTTP 308 永久重新導向至 `/login`。
+- `/login`、`/register`：若已有 `hexschoolTodo` Cookie，Proxy 會導向 `/todos`。
+- `/todos`：若沒有 `hexschoolTodo` Cookie，Proxy 會導向 `/login`；頁面在伺服器端讀取暱稱，清單由 Client Component 載入。
+- `src/lib/api.js`：向 `https://todolist-api.hexschool.io` 發送請求，有 Token 時自動設定 `Authorization` 標頭。
 
-## 使用的套件 & 工具
-
-- [Next.js 16.2.4](https://nextjs.org/) with [React 19.2.5](https://react.dev/)
-- [sweetalert2 11.26.24](https://sweetalert2.github.io/)
-- [Antigravity AI](https://google.com) (Restructuring & Optimization)
+Proxy 只檢查 Cookie 是否存在，Token 是否有效由六角 API 驗證。帳號與待辦資料儲存於外部 API，專案本身沒有資料庫或自建的 API 路由。
